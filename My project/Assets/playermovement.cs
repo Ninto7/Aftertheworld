@@ -20,7 +20,8 @@ public class playermovement : MonoBehaviour
     public Transform firePointTransform;
     Vector2 mousePosition;
     Vector2 moveDirection;
-    
+    bool canShoot;
+    float shoottime;
      
     
 
@@ -71,10 +72,19 @@ public class playermovement : MonoBehaviour
         {
             dashCoolCounter -= Time.deltaTime;
         }
-
-        if (Input.GetMouseButtonDown(0))
+        if (!canShoot)
+        {
+            shoottime -= Time.deltaTime;
+            if (shoottime < 0)
+            {
+                canShoot = true;
+                shoottime = 1f;
+            }
+        }
+        if (Input.GetMouseButtonDown(0) && canShoot )
         {
             firePoint.Fire();
+            canShoot = false;
         }
         moveDirection = new Vector2(movement.x, movement.y).normalized;
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -103,7 +113,7 @@ public class playermovement : MonoBehaviour
             rb.MovePosition(rb.position + dashMove * activeMoveSpeed * Time.fixedDeltaTime);
         }
         Vector2 aimDirection = mousePosition - rb.position;
-        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+        float aimAngle = Mathf.Atan2(aimDirection.y-1, aimDirection.x) * Mathf.Rad2Deg - 90f;
         firePointTransform.rotation = Quaternion.Euler(0, 0, aimAngle);
     }
 

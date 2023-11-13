@@ -15,9 +15,20 @@ public class Bulletscript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag != "Player" ) {
+        if (collision.gameObject.tag != "Player")
+        {
             Destroy(gameObject);
             //zerstört an alles was nicht playertag hat
         }
+        //Debug.Log(collision);
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+            // Debug.Log("tag erkannt");
+            Enemy enemy = collision.GetComponent<Enemy>();
+            enemy.takeDam(40);
+        }
+        
     }
+    
 }
