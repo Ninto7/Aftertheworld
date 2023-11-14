@@ -12,7 +12,7 @@ public class Loader : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            LoadLevel(1);
+            //LoadLevel(1);
         }
     }
 

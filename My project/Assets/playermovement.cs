@@ -19,7 +19,7 @@ public class playermovement : MonoBehaviour
     public Weapon firePoint;
     public Transform firePointTransform;
     Vector2 mousePosition;
-    Vector2 moveDirection;
+     
     bool canShoot;
     float shoottime;
      
@@ -86,7 +86,7 @@ public class playermovement : MonoBehaviour
             firePoint.Fire();
             canShoot = false;
         }
-        moveDirection = new Vector2(movement.x, movement.y).normalized;
+       
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
