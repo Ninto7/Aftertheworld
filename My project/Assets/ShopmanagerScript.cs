@@ -128,7 +128,7 @@ public class ShopmanagerScript : MonoBehaviour
     }
     public void shuffleAll()
     {
-        currentUpgrades[1] = 15;
+        currentUpgrades[1] = Random.Range(1, 15);
         currentUpgrades[2] = Random.Range(1, 15);
         currentUpgrades[3] = Random.Range(1, 15);
         currentUpgrades[4] = 0;
@@ -142,7 +142,7 @@ public class ShopmanagerScript : MonoBehaviour
             for (int i = 1; i < 4; i++)
             {
                 if (currentUpgrades[i]==15) { 
-               // LuckyRoll(i);
+                LuckyRoll(i);
                 }
             }
         }
