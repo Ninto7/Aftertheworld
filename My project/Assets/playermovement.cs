@@ -22,6 +22,7 @@ public class playermovement : MonoBehaviour
      
     bool canShoot;
     float shoottime;
+    public int coinsamount;
      
     
 
@@ -33,7 +34,7 @@ public class playermovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         if (Input.GetKeyDown(KeyCode.Space))
@@ -78,23 +79,18 @@ public class playermovement : MonoBehaviour
             if (shoottime < 0)
             {
                 canShoot = true;
-                shoottime = 1f;
+                shoottime = 0.2f;
             }
         }
-        if (Input.GetMouseButtonDown(0) && canShoot )
+         
+        if (Input.GetMouseButton(0) && canShoot)
         {
             firePoint.Fire();
             canShoot = false;
         }
-       
+
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
-
-
-
-     
-
-
 
     private void FixedUpdate()
     {
@@ -116,7 +112,14 @@ public class playermovement : MonoBehaviour
         float aimAngle = Mathf.Atan2(aimDirection.y-1, aimDirection.x) * Mathf.Rad2Deg - 90f;
         firePointTransform.rotation = Quaternion.Euler(0, 0, aimAngle);
     }
+    public void giveCoin(int amount)
+    {
+        coinsamount += amount;
+    }
+    public void Upgrading(int upgrade)
+    {
 
+    }
 }
              
     

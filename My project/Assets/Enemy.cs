@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     public Rigidbody2D rb;
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         health = 100f;
     }
 
@@ -23,6 +24,8 @@ public class Enemy : MonoBehaviour
         if (health < 0)
         {
             Destroy(gameObject);
+           playermovement script = player.GetComponent<playermovement>();
+            script.giveCoin(3);
         }
         if (!canShoot)
         {
@@ -35,10 +38,10 @@ public class Enemy : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1) && canShoot)
         {
-            firePoint.Fire();
+            //firePoint.Fire();
             canShoot = false;
         }
-        player = GameObject.FindGameObjectWithTag("Player");
+        
         playerPosition.x = player.transform.position.x;
         playerPosition.y = player.transform.position.y;
     }
