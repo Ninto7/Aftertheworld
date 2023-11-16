@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void takeDam(int dam)
+    public void takeDam(float dam)
     {
         health -=  dam;
     }

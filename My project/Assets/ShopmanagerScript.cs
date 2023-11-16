@@ -17,6 +17,13 @@ public class ShopmanagerScript : MonoBehaviour
     public ButtonInfo1 button4;
     public GameObject hiddenButton;
     private bool anotherChoice = false;
+    public int currentAbility = -1;
+    public int doubleShot = 0;
+    public int spreadshot = 0;
+    public int backshot = 0;
+    public int shotIntervall = 0;
+   
+
 
     private void Start()
         
@@ -64,16 +71,42 @@ public class ShopmanagerScript : MonoBehaviour
             
             CoinsTXT.SetText(  coins.ToString());
             GameObject.FindGameObjectWithTag("Player").GetComponent<playermovement>().coinsamount = ((int)coins);
-            if(ButtonRef.GetComponent<ButtonInfo1>().Upgrade == 15)
+            switch(ButtonRef.GetComponent<ButtonInfo1>().Upgrade)
             {
-                anotherChoice = true;
+                case 19: 
+                    anotherChoice = true;
                 hiddenButton.SetActive(true);
                 priceIncrease(4);
+                    break;
+                case 2:
+                    doubleShot++;
+                    break;
+                case 3:
+                    spreadshot++;
+                    break;
+                case 4:
+                    backshot++;
+                    break;
+                case 8:
+                    shotIntervall++;
+                    break;
+                case 11:
+                    currentAbility = 11;
+                    break;
+                case 12:
+                    currentAbility = 12;
+                    break;
+                case 13:
+                    currentAbility = 13;
+                    break;
+                case 14:
+                    currentAbility = 14;
+                    break;
             }
             GameObject.FindGameObjectWithTag("Player").GetComponent<playermovement>().Upgrading(ButtonRef.GetComponent<ButtonInfo1>().Upgrade);
             shuffle(ButtonRef.GetComponent<ButtonInfo1>().ItemId);
             priceIncrease(ButtonRef.GetComponent<ButtonInfo1>().ItemId);
-
+            ButtonRef.GetComponent<ButtonInfo1>().pics();
            
         }
     }
@@ -82,30 +115,30 @@ public class ShopmanagerScript : MonoBehaviour
     {
 
         if (anotherChoice == false) {
-            if (currentUpgrades[i] == 15)
+            if (currentUpgrades[i] == 19)
             {
                 if (Random.Range(1, 2) == 1)
                 {
-                    currentUpgrades[i] = Random.Range(1, 14);
+                    currentUpgrades[i] = Random.Range(1, 18);
                 }
             }
         }
         else
         {
-            currentUpgrades[i] = Random.Range(1, 14);
+            currentUpgrades[i] = Random.Range(1, 18);
         }
         
     }
     public void shuffle(int button)
     {
-        currentUpgrades[button] = Random.Range(1, 15);
-        if (currentUpgrades[button] == 15)
+        currentUpgrades[button] = Random.Range(1, 19);
+        if (currentUpgrades[button] == 19)
         {
             LuckyRoll(button);
         }
-        while (Doubled(button))
+        while (Doubled(button)|| bannedUpgardes(button))
         {
-            currentUpgrades[button] = Random.Range(1, 14);
+            currentUpgrades[button] = Random.Range(1, 18);
         }
         button1.Upgrade = currentUpgrades[1];
         button2.Upgrade = currentUpgrades[2];
@@ -128,45 +161,41 @@ public class ShopmanagerScript : MonoBehaviour
     }
     public void shuffleAll()
     {
-        currentUpgrades[1] = Random.Range(1, 15);
-        currentUpgrades[2] = Random.Range(1, 15);
-        currentUpgrades[3] = Random.Range(1, 15);
+        currentUpgrades[1] = Random.Range(1, 19);
+        currentUpgrades[2] = Random.Range(1, 19);
+        currentUpgrades[3] = Random.Range(1, 19);
         currentUpgrades[4] = 0;
 
         if (anotherChoice)
         {
-            currentUpgrades[4] = Random.Range(1, 15);
+            currentUpgrades[4] = Random.Range(1, 18);
         }
         else
         {
             for (int i = 1; i < 4; i++)
             {
-                if (currentUpgrades[i]==15) { 
+                if (currentUpgrades[i]==19) { 
                 LuckyRoll(i);
                 }
             }
         }
         for (int j = 2; j < 5; j++)
         {
-            while (currentUpgrades[1] == currentUpgrades[j])
+            while (Doubled(j) || bannedUpgardes(j) )
             {
-                currentUpgrades[j] = Random.Range(1, 14);
+                currentUpgrades[j] = Random.Range(1, 18);
             }
         }
-        for (int k = 3; k <5; k++) {
-            while (currentUpgrades[2] == currentUpgrades[k])
-            {
-                currentUpgrades[k] = Random.Range(1, 14);
-            }
-        }
-        while (currentUpgrades[3] == currentUpgrades[4])
-        {
-            currentUpgrades[4] = Random.Range(1, 14);
-        }
+       
         button1.Upgrade = currentUpgrades[1];
         button2.Upgrade = currentUpgrades[2];
         button3.Upgrade = currentUpgrades[3];
         button4.Upgrade = currentUpgrades[4];
+        button1.pics();
+        button2.pics();
+        button3.pics();
+        button4.pics();
+
     }
     public void priceIncrease(int buttonNumber)
     {
@@ -190,4 +219,26 @@ public class ShopmanagerScript : MonoBehaviour
         shopItems[2, buttonNumber] = highestPrice + priceIncrease;
          
     }
-}
+    public bool bannedUpgardes(int button)
+    {
+        if(currentUpgrades[button] == currentAbility)
+        {
+            return true;
+        }else if(currentUpgrades[button] == 2 && doubleShot > 1)
+        {
+            return true;
+        } else if(currentUpgrades[button] == 3 && spreadshot > 4)
+        {
+            return true;
+        }else if(currentUpgrades[button] == 4 && backshot > 2)
+        {
+            return true;
+        } else if(currentUpgrades[button] == 8 && shotIntervall > 8)
+        {
+            return true;
+        }
+        return false;
+    }
+   
+   }
+

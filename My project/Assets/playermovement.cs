@@ -19,6 +19,7 @@ public class playermovement : MonoBehaviour
     public Weapon firePoint;
     public Transform firePointTransform;
     Vector2 mousePosition;
+    float shotcooldown = 1f;
      
     bool canShoot;
     float shoottime;
@@ -79,7 +80,7 @@ public class playermovement : MonoBehaviour
             if (shoottime < 0)
             {
                 canShoot = true;
-                shoottime = 0.2f;
+                shoottime = shotcooldown;
             }
         }
          
@@ -118,7 +119,71 @@ public class playermovement : MonoBehaviour
     }
     public void Upgrading(int upgrade)
     {
-
+        switch(upgrade){
+            case 1:
+                //damage up
+                firePoint.damageupdate(10);
+              
+                break;
+            case 2:
+                //doppel shot
+                break;
+            case 3:
+                 //spread shot
+                break;
+            case 4:
+                //backshot
+                break;
+            case 5:
+                //movementspeed up
+                moveSpeed += 1f;
+                break;
+            case 6:
+                //dash distance
+                dashLength += .05f;
+                break;
+            case 7:
+                //dash cooldown
+                dashCooldown -= .1f;
+                break;
+            case 8:
+                //shotintervall
+                shotcooldown -= .1f;
+                break;
+            case 9:
+                 //crit chance
+                break;
+            case 10:
+                 //dash damage
+                break;
+            case 11:
+               // roundabout
+                break;
+            case 12:
+                // ram dash
+                break;
+            case 13:
+                 //slow shot
+                break;
+            case 14:
+                //turret
+                break;
+            case 15:
+                //ability dam
+                break;
+            case 16:
+                //ability cooldown
+                break;
+            case 17:
+                // passive income
+                break;
+            case 18:
+                // refresh decrese
+                break;
+            case 19:
+                // another choice
+                break;
+        }
     }
 }
              
