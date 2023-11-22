@@ -15,6 +15,7 @@ public class Bulletscript : MonoBehaviour
         hit = false;
         //rb.velocity = transform.right * speed;
         //bullet bewegt sich
+        tag = "Bullet";
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

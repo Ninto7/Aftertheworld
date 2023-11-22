@@ -24,6 +24,8 @@ public class playermovement : MonoBehaviour
     bool canShoot;
     float shoottime;
     public int coinsamount;
+    public int shotAmount =1;
+   public int spreadAmount = 0;
      
     
 
@@ -86,7 +88,7 @@ public class playermovement : MonoBehaviour
          
         if (Input.GetMouseButton(0) && canShoot)
         {
-            firePoint.Fire();
+            firePoint.Fire(shotAmount, spreadAmount);
             canShoot = false;
         }
 
@@ -112,6 +114,7 @@ public class playermovement : MonoBehaviour
         Vector2 aimDirection = mousePosition - rb.position;
         float aimAngle = Mathf.Atan2(aimDirection.y-1, aimDirection.x) * Mathf.Rad2Deg - 90f;
         firePointTransform.rotation = Quaternion.Euler(0, 0, aimAngle);
+        firePoint.angle = aimAngle;
     }
     public void giveCoin(int amount)
     {
@@ -127,9 +130,11 @@ public class playermovement : MonoBehaviour
                 break;
             case 2:
                 //doppel shot
+                shotAmount++;
                 break;
             case 3:
-                 //spread shot
+                //spread shot
+                spreadAmount++;
                 break;
             case 4:
                 //backshot

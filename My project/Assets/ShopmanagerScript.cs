@@ -227,7 +227,7 @@ public class ShopmanagerScript : MonoBehaviour
         }else if(currentUpgrades[button] == 2 && doubleShot > 1)
         {
             return true;
-        } else if(currentUpgrades[button] == 3 && spreadshot > 4)
+        } else if(currentUpgrades[button] == 3 && spreadshot > 1)
         {
             return true;
         }else if(currentUpgrades[button] == 4 && backshot > 2)

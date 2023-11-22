@@ -17,10 +17,13 @@ public class EnemyBulletscript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag != "Enemy")
+        if (collision.gameObject.tag != "Enemy" && collision.gameObject.tag != "Bullet")
         {
-            Destroy(gameObject);
-            //zerstört an alles was nicht playertag hat
+            
+             
+                Destroy(gameObject);
+                //zerstört an alles was nicht playertag hat
+           
         }
         //Debug.Log(collision);
         if (collision.gameObject.tag == "Player")
