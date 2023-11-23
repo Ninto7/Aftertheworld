@@ -224,13 +224,13 @@ public class ShopmanagerScript : MonoBehaviour
         if(currentUpgrades[button] == currentAbility)
         {
             return true;
-        }else if(currentUpgrades[button] == 2 && doubleShot > 1)
+        }else if(currentUpgrades[button] == 2 && doubleShot > 2)
         {
             return true;
         } else if(currentUpgrades[button] == 3 && spreadshot > 1)
         {
             return true;
-        }else if(currentUpgrades[button] == 4 && backshot > 2)
+        }else if(currentUpgrades[button] == 4 && backshot > 1)
         {
             return true;
         } else if(currentUpgrades[button] == 8 && shotIntervall > 8)

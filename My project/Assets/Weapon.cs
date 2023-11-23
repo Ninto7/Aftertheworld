@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
     public float damage = 40;
     public float angle;
 
-    public void Fire(int amount, int spread)
+    public void Fire(int amount, int spread, int back)
     {
         Vector3 right = transform.right;
          
@@ -79,6 +79,26 @@ public class Weapon : MonoBehaviour
                 bullet11.GetComponent<Bulletscript>().damage = damage;
                 break;
 
+        }
+        switch (back)
+        {
+            case 1:
+                offset = Quaternion.Euler(0, 0, angle + 180);
+                GameObject bullet12 = Instantiate(this.bullet, transform.position, offset);
+                bullet12.GetComponent<Rigidbody2D>().AddForce(bullet12.transform.up * fireForce, ForceMode2D.Impulse);
+                bullet12.GetComponent<Bulletscript>().damage = damage;
+                break;
+            case 2:
+                offset = Quaternion.Euler(0, 0, angle + 180);
+                GameObject bullet13 = Instantiate(this.bullet, transform.position + right * 0.3f, offset);
+                bullet13.GetComponent<Rigidbody2D>().AddForce(bullet13.transform.up * fireForce, ForceMode2D.Impulse);
+                bullet13.GetComponent<Bulletscript>().damage = damage;
+
+                GameObject bullet14 = Instantiate(this.bullet, transform.position + right * -0.3f, offset);
+                bullet14.GetComponent<Rigidbody2D>().AddForce(bullet14.transform.up * fireForce, ForceMode2D.Impulse);
+                bullet14.GetComponent<Bulletscript>().damage = damage;
+                break;
+            
         }
     }
     public void damageupdate(int newdamage)
