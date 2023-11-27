@@ -20,13 +20,16 @@ public class playermovement : MonoBehaviour
     public Transform firePointTransform;
     Vector2 mousePosition;
     float shotcooldown = 1f;
-     
+    float abilityCooldown = 5f;
+    float maxAbilityCool = 5f;
+    bool canAbility;
     bool canShoot;
     float shoottime;
     public int coinsamount;
     int shotAmount =1;
     int spreadAmount = 0;
     int backshotAmount = 0;
+     int AbilityType = 0;
      
     
 
@@ -94,6 +97,21 @@ public class playermovement : MonoBehaviour
         }
 
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        if (!canAbility)
+        {
+            abilityCooldown -= Time.deltaTime;
+            if(abilityCooldown < 0)
+            {
+                canAbility = true;
+                abilityCooldown = maxAbilityCool;
+            } 
+        }
+        if(canAbility && Input.GetKeyDown(KeyCode.E))
+        {
+            canAbility = false;
+            Ability();
+        }
     }
 
     private void FixedUpdate()
@@ -120,6 +138,18 @@ public class playermovement : MonoBehaviour
     public void giveCoin(int amount)
     {
         coinsamount += amount;
+    }
+    public void Ability()
+    {
+        switch (AbilityType)
+        {
+            case 0:
+                canAbility = true;
+                break;
+            case 1:
+                firePoint.Ability();
+                break;
+        }
     }
     public void Upgrading(int upgrade)
     {
@@ -164,16 +194,20 @@ public class playermovement : MonoBehaviour
                  //dash damage
                 break;
             case 11:
-               // roundabout
+                // roundabout
+                AbilityType = 1;
                 break;
             case 12:
                 // ram dash
+                AbilityType = 2;
                 break;
             case 13:
-                 //slow shot
+                //slow shot
+                AbilityType = 3;
                 break;
             case 14:
                 //turret
+                AbilityType = 4;
                 break;
             case 15:
                 //ability dam

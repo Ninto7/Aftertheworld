@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     public float damage = 40;
     public float angle;
 
+
     public void Fire(int amount, int spread, int back)
     {
         Vector3 right = transform.right;
@@ -105,5 +106,19 @@ public class Weapon : MonoBehaviour
     {
         damage += damage * newdamage /100;
          
+    }
+    public void Ability()
+    {
+        Quaternion offset = transform.rotation;
+        
+
+        for (int i =0; i<8; i++)
+        {
+            offset = Quaternion.Euler(0, 0, angle + 45 *i);
+            GameObject bullet13 = Instantiate(this.bullet, transform.position, offset);
+            bullet13.GetComponent<Rigidbody2D>().AddForce(bullet13.transform.up * fireForce, ForceMode2D.Impulse);
+            bullet13.GetComponent<Bulletscript>().damage = damage;
+        }
+
     }
 }
