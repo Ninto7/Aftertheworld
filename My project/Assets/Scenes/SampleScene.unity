@@ -11361,6 +11361,7 @@ MonoBehaviour:
   firePoint: {fileID: 951575137}
   firePointTransform: {fileID: 951575136}
   coinsamount: 10000
+  shopmanager: {fileID: 1306660003}
 --- !u!50 &857808921
 Rigidbody2D:
   serializedVersion: 4
@@ -11478,6 +11479,7 @@ GameObject:
   - component: {fileID: 925679316}
   - component: {fileID: 925679315}
   - component: {fileID: 925679314}
+  - component: {fileID: 925679317}
   m_Layer: 5
   m_Name: Refresh
   m_TagString: Untagged
@@ -11552,7 +11554,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1306660003}
         m_TargetAssemblyTypeName: ShopmanagerScript, Assembly-CSharp
-        m_MethodName: shuffleAll
+        m_MethodName: Refresh
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11600,6 +11602,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 925679312}
   m_CullTransparentMesh: 1
+--- !u!114 &925679317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925679312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3a3541ae1501b45b8f14ab24db28b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PriceTxt: {fileID: 1529440029}
+  Shopmanager: {fileID: 1306660001}
 --- !u!1 &951575135
 GameObject:
   m_ObjectHideFlags: 0
@@ -13941,6 +13957,8 @@ MonoBehaviour:
   spreadshot: 0
   backshot: 0
   shotIntervall: 0
+  refreshCost: 10
+  refreshCostPerClick: 10
 --- !u!1 &1459275892
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,12 +22,14 @@ public class ShopmanagerScript : MonoBehaviour
     public int spreadshot = 0;
     public int backshot = 0;
     public int shotIntervall = 0;
-   
+    public float refreshCost;
+    public int refreshCostPerClick = 10;
 
 
     private void Start()
         
     {
+        refreshCost = 10f;
         currentUpgrades = new int[5];
         if(!anotherChoice)
         {
@@ -239,6 +241,28 @@ public class ShopmanagerScript : MonoBehaviour
         }
         return false;
     }
-   
+
+    public void Refresh()
+    {
+        if (coins >= refreshCost)
+        {
+
+            coins = coins - refreshCost;
+            CoinsTXT.SetText(coins.ToString());
+            refreshCost += refreshCostPerClick;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<playermovement>().coinsamount = ((int)coins);
+            shuffleAll();
+            
+        }
+    }
+    public void Refreshdecrease()
+    {
+        if (refreshCostPerClick != 1)
+        {
+            refreshCostPerClick -= 1;
+        }
+        refreshCost -= refreshCost * 0.25f;
+        refreshCost =((int)refreshCost);
+    }
    }
 

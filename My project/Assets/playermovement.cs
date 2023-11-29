@@ -30,6 +30,7 @@ public class playermovement : MonoBehaviour
     int spreadAmount = 0;
     int backshotAmount = 0;
      int AbilityType = 0;
+    public ShopmanagerScript shopmanager;
      
     
 
@@ -214,12 +215,14 @@ public class playermovement : MonoBehaviour
                 break;
             case 16:
                 //ability cooldown
+                maxAbilityCool -= maxAbilityCool * 0.1f;
                 break;
             case 17:
                 // passive income
                 break;
             case 18:
                 // refresh decrese
+                shopmanager.Refreshdecrease();
                 break;
             case 19:
                 // another choice
