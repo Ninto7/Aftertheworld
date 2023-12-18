@@ -11360,8 +11360,12 @@ MonoBehaviour:
   dashCooldown: 1
   firePoint: {fileID: 951575137}
   firePointTransform: {fileID: 951575136}
-  coinsamount: 10000
+  coinsamount: 100000
+  shotAmount: 1
+  spreadAmount: 0
+  AbilityType: 0
   shopmanager: {fileID: 1306660003}
+  critChance: 1
 --- !u!50 &857808921
 Rigidbody2D:
   serializedVersion: 4
@@ -11663,6 +11667,7 @@ MonoBehaviour:
   bullet: {fileID: 1503026269766994842, guid: fe8d46f9a1956974ab4707f90f0584e5, type: 3}
   fireForce: 20
   damage: 40
+  abDamage: 40
   angle: 0
 --- !u!1 &983756661
 GameObject:

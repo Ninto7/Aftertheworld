@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
     public GameObject bullet;
     public float fireForce = 20f;
     public float damage = 40;
+    public float abDamage = 40;
     public float angle;
 
 
@@ -107,18 +108,32 @@ public class Weapon : MonoBehaviour
         damage += damage * newdamage /100;
          
     }
-    public void Ability()
+    public void abilityDamageupdate(int newdamage)
     {
-        Quaternion offset = transform.rotation;
-        
+        abDamage += abDamage * newdamage / 100;
 
-        for (int i =0; i<8; i++)
+    }
+    public void Ability(int type)
+    {
+        switch (type) {
+            case 1:
+        Quaternion offset = transform.rotation;
+
+
+        for (int i = 0; i < 8; i++)
         {
-            offset = Quaternion.Euler(0, 0, angle + 45 *i);
+            offset = Quaternion.Euler(0, 0, angle + 45 * i);
             GameObject bullet13 = Instantiate(this.bullet, transform.position, offset);
             bullet13.GetComponent<Rigidbody2D>().AddForce(bullet13.transform.up * fireForce, ForceMode2D.Impulse);
-            bullet13.GetComponent<Bulletscript>().damage = damage;
+            bullet13.GetComponent<Bulletscript>().damage = abDamage;
         }
-
+                break;
+            case 3:
+                GameObject bullet = Instantiate(this.bullet, transform.position, transform.rotation);
+                bullet.GetComponent<Rigidbody2D>().AddForce(transform.up * fireForce*0.1f , ForceMode2D.Impulse);
+                bullet.GetComponent<Bulletscript>().damage = abDamage*10;
+                bullet.GetComponent<Bulletscript>().pierce = true;
+                break;
+    }
     }
 }

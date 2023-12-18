@@ -26,12 +26,12 @@ public class playermovement : MonoBehaviour
     bool canShoot;
     float shoottime;
     public int coinsamount;
-    int shotAmount =1;
-    int spreadAmount = 0;
+    public int shotAmount =1;
+    public int spreadAmount = 0;
     int backshotAmount = 0;
-     int AbilityType = 0;
+    public int AbilityType = 0;
     public ShopmanagerScript shopmanager;
-     
+    public int critChance=1;
     
 
 
@@ -148,8 +148,13 @@ public class playermovement : MonoBehaviour
                 canAbility = true;
                 break;
             case 1:
-                firePoint.Ability();
+                firePoint.Ability(AbilityType);
                 break;
+            case 3:
+                firePoint.Ability(AbilityType);
+                break;
+
+
         }
     }
     public void Upgrading(int upgrade)
@@ -189,7 +194,8 @@ public class playermovement : MonoBehaviour
                 shotcooldown -= .1f;
                 break;
             case 9:
-                 //crit chance
+                //crit chance
+                critChance++;
                 break;
             case 10:
                  //dash damage
@@ -212,6 +218,7 @@ public class playermovement : MonoBehaviour
                 break;
             case 15:
                 //ability dam
+                firePoint.abilityDamageupdate(10);
                 break;
             case 16:
                 //ability cooldown
